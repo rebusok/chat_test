@@ -15,7 +15,7 @@ function App() {
         socket.on('new-message-sent', ((mesNew:any) => {
             setMes((mes) => [...mes, mesNew])
         }))
-    } )
+    }, [])
     const onClickHandler = () => {
         socket.emit('client-message-sent', value)
         setValue('')
