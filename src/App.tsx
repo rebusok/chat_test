@@ -1,24 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {ChangeEvent, useEffect, useState} from 'react';
+import io from 'socket.io-client';
 import './App.css';
-
+// const socket = io('https://chat-back-test.herokuapp.com/')
+const socket = io('http://localhost:3009/')
 function App() {
-  return (
+  const [mes, setMes] = useState<any[]>([]
+  )
+    const [value, setValue] = useState('hello')
+    const [name, setName] = useState('')
+    useEffect(() => {
+        socket.on('messages-init', ((messages: any) => {
+            setMes(messages)
+        }))
+        socket.on('new-message-sent', ((mesNew:any) => {
+            setMes((mes) => [...mes, mesNew])
+        }))
+    }, [])
+    const onClickHandler = () => {
+        socket.emit('client-message-sent', value)
+        setValue('')
+    }
+    const changeValueHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
+      setValue(e.currentTarget.value)
+    }
+    const changeNameHandler = (e:ChangeEvent<HTMLInputElement>) => {
+        setName(e.currentTarget.value)
+    }
+
+    function onSentNameHandler() {
+        socket.emit('client-name-sent', name)
+    }
+
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={'message'}>
+        {mes.map(m => {
+          return (
+              <div key={m.id}>
+                <b>{m.user.name} : </b> {m.message}
+                <hr/>
+              </div>
+          )
+        })}
+      </div>
+        <div>
+            <input value={name} onChange={ changeNameHandler}/>
+            <button onClick={onSentNameHandler}>Send</button>
+        </div>
+        <div className={'sendMessage'}>
+            <textarea value={value} onChange={ changeValueHandler}/>
+            <button onClick={onClickHandler}>Send</button>
+        </div>
+
     </div>
   );
 }
