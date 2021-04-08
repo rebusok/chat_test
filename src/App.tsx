@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import io from 'socket.io-client';
 import './App.css';
 const socket = io('https://chat-back-test.herokuapp.com/')
-// const socket = io('http://localhost:3009/')
+
 function App() {
   const [mes, setMes] = useState<any[]>([]
   )
