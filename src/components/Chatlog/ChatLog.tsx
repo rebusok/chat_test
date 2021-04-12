@@ -13,7 +13,7 @@ const ChatLog = () => {
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
     const changeName = useSelector(selectChangeName)
     const initUser = useSelector(selectInitUser)
-
+    console.log(initUser)
     function scrollHandler(event: React.UIEvent<HTMLDivElement, UIEvent>) {
         const maxScrollPosition = event.currentTarget.scrollHeight - event.currentTarget.clientHeight
         const absPosition = Math.abs(maxScrollPosition - event.currentTarget.scrollTop)
@@ -38,7 +38,6 @@ const ChatLog = () => {
                         return (
                             <div key={m.id} className={m.user.id === initUser?.id ? style['left'] : style['right']}>
                                 <b>{m.user.name} : </b> {m.message}
-
                             </div>
                         )
                     })}
@@ -51,9 +50,9 @@ const ChatLog = () => {
                         )
                     })}
                     <div ref={messagesAnchorRef}/>
-                    <TextInput/>
-                </div>
 
+                </div>
+                <TextInput/>
             </div>
 
         </div>
