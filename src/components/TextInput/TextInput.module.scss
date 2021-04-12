@@ -1,0 +1,44 @@
+
+
+.mainText {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 10%;
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    textarea {
+      width:70%;
+      height:50px;
+      resize: none;
+      padding:15px;
+      border-radius:15px;
+      border:0;
+      box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+      margin-right: 5px;
+      outline:none;
+    }
+    button {
+      height:50px;
+      border-radius:15px;
+      border:0;
+      box-shadow:0 -3px rgba(0,0,0,0.06) inset;
+      background: rgb(255, 255, 255);
+      margin-right: 5px;
+      cursor: pointer;
+      &:hover{
+        background: rgb(245, 245, 245);
+        outline:none;
+      }
+      &:active {
+        background: rgb(255, 255, 255);
+        box-shadow:0 3px rgba(0,0,0,0.06) inset;
+        outline:none;
+      }
+    }
+  }
+
+}

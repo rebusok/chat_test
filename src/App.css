@@ -3,14 +3,14 @@
     padding: 10px;
     height: 300px;
     overflow-y: scroll;
-    width: 300px;
+    width: 600px;
 }
 .App {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     padding: 20px;
-    flex-direction: column;
+    max-width: 900px;
+    margin: 0 auto;
 }
 .sendMessage{
     display: flex;
@@ -24,4 +24,15 @@
 }
 .sendMessage textarea {
     padding: 10px;
+}
+.name_login{
+    display: flex;
+    margin-top: 10px;
+}
+.name_login button{
+    margin-left: 10px;
+}
+.message_wrapper {
+    display: flex;
+    flex-direction: column;
 }

@@ -1,0 +1,72 @@
+.chatMain {
+  height: 100vh;
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  padding: 20px;
+
+
+  .container {
+    max-width: 900px;
+    padding: 20px;
+    margin: 0 auto;
+
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    .windowChat {
+      width: 70%;
+      min-height: 300px;
+      border: 1px solid #eae9e9;;
+      border-radius: 10px;
+      padding: 20px;
+      background: #eae9e9;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+  }
+
+}
+.left {
+  align-self: flex-start;
+  margin-top: 7px;
+}
+.right {
+
+  align-self: flex-end;
+  margin-top: 5px;
+}
+
+.typeng {
+  animation: opacityToggle 2s infinite;
+  font-size: 10px;
+}
+
+@keyframes opacityToggle{
+  0%{
+    opacity: 1;
+  }
+  10%{
+    opacity: .7;
+  }
+  20% {
+    opacity: .5;
+  }
+  40% {
+    opacity: .3;
+  }
+  50%{
+    opacity: 0;
+  }
+  60%{
+    opacity: .3;
+  }
+  80% {
+    opacity: .5;
+  }
+  90% {
+    opacity: .7;
+  }
+  100%{
+    opacity: 1;
+  }
+}
