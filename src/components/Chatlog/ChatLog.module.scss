@@ -19,11 +19,11 @@
       height: 300px;
       border: 1px solid #eae9e9;;
       border-radius: 10px;
-
+      overflow-y: scroll;
       padding: 20px;
       background: #eae9e9;
       display: flex;
-      justify-content: space-between;
+
       flex-direction: column;
     }
   }

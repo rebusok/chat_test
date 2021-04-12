@@ -39,6 +39,11 @@
       box-shadow: 0 3px rgb(33,147,90) inset;
       outline:none;
     }
+    &:disabled , &:hover{
+      background: rgb(64,199,129);
+      opacity: .6;
+      cursor: auto;
+    }
   }
 }
 button:active, button:focus {

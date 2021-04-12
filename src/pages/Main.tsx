@@ -9,6 +9,7 @@ const Main: FC = () => {
     const [name, setName] = useState('')
     const [errorName, setErrorName] = useState<boolean>(false)
     const [errorNameStr, setErrorNameStr] = useState<string | null>(null)
+    const [dissable, setDissable] = useState<boolean>(false)
     const changeName = useSelector(selectChangeName)
     const changeNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.value.trim() !== '') {
@@ -20,8 +21,10 @@ const Main: FC = () => {
     const history = useHistory()
 
     useEffect(() => {
+
         setTimeout(() => {
             if (changeName) {
+                setDissable(false)
                 history.push('chat')
             }
         }, 2000)
@@ -33,7 +36,9 @@ const Main: FC = () => {
             setErrorName(true)
             setErrorNameStr('Заполните поле')
         } else {
+            setDissable(true)
             dispatch(setClientName(name))
+
             setName('')
         }
     }
@@ -43,7 +48,7 @@ const Main: FC = () => {
             <h1>Добро пожаловать</h1>
             <div>
                 <span>Представьтесь</span> <input value={name} onChange={changeNameHandler}/>
-                <button onClick={onSentNameHandler}>Save</button>
+                <button disabled={dissable} onClick={onSentNameHandler}>Save</button>
                 {errorName ? <span>{errorNameStr}</span> : null}
             </div>
 
