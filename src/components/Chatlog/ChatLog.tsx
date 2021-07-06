@@ -13,7 +13,7 @@ const ChatLog = () => {
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
     const changeName = useSelector(selectChangeName)
     const initUser = useSelector(selectInitUser)
-    console.log(initUser)
+
     function scrollHandler(event: React.UIEvent<HTMLDivElement, UIEvent>) {
         const maxScrollPosition = event.currentTarget.scrollHeight - event.currentTarget.clientHeight
         const absPosition = Math.abs(maxScrollPosition - event.currentTarget.scrollTop)

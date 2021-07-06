@@ -38,7 +38,7 @@ export enum ActionType {
 export const chatReducer = (state: stateProps = initialState, action: chatType): stateProps => {
     switch (action.type) {
         case ActionType.MESSAGES_RECEIVED: {
-            return {...state, ...action.messages}
+            return {...state, messages: [...state.messages, ...action.messages]}
         }
         case ActionType.NEW_MESSAGE: {
             return {
@@ -55,8 +55,14 @@ export const chatReducer = (state: stateProps = initialState, action: chatType):
                 ...state, typingUsers:[...state.typingUsers.filter(u => u.id !== action.user.id), action.user]
             }
         case ActionType.APP_CHANGE_NAME: {
-            return {
-                ...state, changeName:action.changeName
+            if(state.initUser) {
+                return {
+                    ...state, changeName:action.changeName, initUser: {...state.initUser, name: action.newName ?? 'Anonym'}
+                }
+            }else {
+                return {
+                    ...state, changeName:action.changeName
+                }
             }
         }
         case ActionType.APP_INIT_USER:
@@ -69,7 +75,7 @@ export const chatReducer = (state: stateProps = initialState, action: chatType):
 }
 
 const messagesReceived = (messages: messageType[]) => ({type: ActionType.MESSAGES_RECEIVED, messages}as const)
-const changeName = (changeName: boolean) => ({type: ActionType.APP_CHANGE_NAME, changeName}as const)
+const changeName = (changeName: boolean, newName?: string) => ({type: ActionType.APP_CHANGE_NAME, changeName, newName}as const)
 
 const newMessages = (message: messageType) => ({
     type: ActionType.NEW_MESSAGE,
@@ -85,6 +91,7 @@ export const createConnection = () => (dispatch: Dispatch) => {
     api.createConnection()
     api.subscribe(
         messages => {
+            console.log(messages)
             dispatch(messagesReceived(messages))
         }, message => {
             dispatch(newMessages(message))
@@ -102,7 +109,7 @@ export const destroyConnection = () => (dispatch: Dispatch) => {
 }
 export const setClientName = (name:string) => (dispatch: Dispatch) => {
    api.sentName(name)
-    dispatch(changeName(true))
+    dispatch(changeName(true, name))
 }
 export const setClientMessage = (message:string) => (dispatch: Dispatch) => {
     api.sentMessage(message)
